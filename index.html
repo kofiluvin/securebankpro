@@ -1,1 +1,2112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureBank | Online Banking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ====== PROFESSIONAL BANKING CSS ====== */
+        :root {
+            --primary-blue: #1a237e;
+            --secondary-blue: #283593;
+            --accent-teal: #00695c;
+            --light-blue: #e8eaf6;
+            --success-green: #2e7d32;
+            --warning-orange: #f57c00;
+            --danger-red: #c62828;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --border-color: #e0e0e0;
+            --shadow-light: 0 2px 12px rgba(0,0,0,0.08);
+            --shadow-medium: 0 4px 20px rgba(0,0,0,0.12);
+            --gradient-primary: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ====== HEADER & NAVIGATION ====== */
+        .main-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0 2rem;
+            box-shadow: var(--shadow-medium);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .bank-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: #4fc3f7;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.25rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* ====== MAIN LAYOUT ====== */
+        .main-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        /* ====== SIDEBAR ====== */
+        .sidebar {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-light);
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.75rem 1rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .sidebar-link:hover {
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+        }
+
+        .sidebar-link.active {
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .sidebar-icon {
+            width: 20px;
+            text-align: center;
+            color: var(--primary-blue);
+        }
+
+        /* ====== MAIN CONTENT ====== */
+        .content-area {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        .page-subtitle {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        /* ====== CARDS & DASHBOARD ====== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+        }
+
+        .card-balance {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-detail {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* ====== FORMS ====== */
+        .form-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-light);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger-red);
+            color: white;
+        }
+
+        /* ====== TABLES ====== */
+        .data-table {
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+        }
+
+        .table-header {
+            background: var(--light-blue);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem 1.5rem;
+            background: #f8f9fa;
+            font-weight: 600;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* ====== MODALS ====== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        /* ====== ALERTS & NOTIFICATIONS ====== */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .alert-success {
+            background-color: #e8f5e9;
+            color: var(--success-green);
+            border-left: 4px solid var(--success-green);
+        }
+
+        .alert-warning {
+            background-color: #fff3e0;
+            color: var(--warning-orange);
+            border-left: 4px solid var(--warning-orange);
+        }
+
+        .alert-danger {
+            background-color: #ffebee;
+            color: var(--danger-red);
+            border-left: 4px solid var(--danger-red);
+        }
+
+        .alert-info {
+            background-color: #e3f2fd;
+            color: var(--primary-blue);
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        /* ====== RESPONSIVE DESIGN ====== */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-header {
+                padding: 0 1rem;
+            }
+            
+            .main-nav ul {
+                gap: 0.5rem;
+            }
+        }
+
+        /* ====== UTILITY CLASSES ====== */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-success {
+            color: var(--success-green);
+        }
+
+        .text-danger {
+            color: var(--danger-red);
+        }
+
+        .text-warning {
+            color: var(--warning-orange);
+        }
+
+        .mb-3 { margin-bottom: 1rem; }
+        .mb-4 { margin-bottom: 1.5rem; }
+        .mt-3 { margin-top: 1rem; }
+        .mt-4 { margin-top: 1.5rem; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .w-100 { width: 100%; }
+
+        /* ====== AUTH PAGES ====== */
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-title {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-subtitle {
+            color: var(--text-light);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-light);
+        }
+
+        .auth-link {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ====== QUICK ACTIONS ====== */
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quick-action-btn {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-action-btn:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-light);
+        }
+
+        .quick-action-icon {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ====== STATEMENT PREVIEW ====== */
+        .statement-preview {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 2rem;
+        }
+
+        .statement-header {
+            text-align: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- ====== AUTHENTICATION PAGES ====== -->
+    <div id="authPages" class="auth-container">
+        <!-- Login Page -->
+        <div id="loginPage" class="auth-card">
+            <div class="auth-header">
+                <h1 class="auth-title">SecureBank</h1>
+                <p class="auth-subtitle">Sign in to your banking account</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Username or Email</label>
+                    <input type="text" class="form-input" id="loginUsername" placeholder="Enter username or email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="loginPassword" placeholder="Enter password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="checkbox" id="rememberMe"> Remember me for 30 days
+                    </label>
+                </div>
+                
+                <button type="button" class="btn btn-primary w-100" onclick="handleLogin()">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+            </form>
+            
+            <div class="auth-footer">
+                <a class="auth-link" onclick="showAuthPage('forgotPasswordPage')">
+                    Forgot password?
+                </a> • 
+                <a class="auth-link" onclick="showAuthPage('registerPage')">
+                    Create new account
+                </a>
+            </div>
+        </div>
+        
+        <!-- Registration Page -->
+        <div id="registerPage" class="auth-card hidden">
+            <div class="auth-header">
+                <h1 class="auth-title">Create Account</h1>
+                <p class="auth-subtitle">Join SecureBank today</p>
+            </div>
+            
+            <form id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">First Name</label>
+                        <input type="text" class="form-input" id="regFirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-input" id="regLastName" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" id="regEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-input" id="regUsername" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="regPassword" placeholder="Minimum 6 characters" minlength="6" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Confirm Password</label>
+                    <input type="password" class="form-input" id="regConfirmPassword" required>
+                </div>
+                
+                <button type="button" class="btn btn-primary w-100" onclick="handleRegister()">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </form>
+            
+            <div class="auth-footer">
+                Already have an account? 
+                <a class="auth-link" onclick="showAuthPage('loginPage')">Sign in here</a>
+            </div>
+        </div>
+        
+        <!-- Forgot Password Page -->
+        <div id="forgotPasswordPage" class="auth-card hidden">
+            <div class="auth-header">
+                <h1 class="auth-title">Reset Password</h1>
+                <p class="auth-subtitle">Enter your email to reset password</p>
+            </div>
+            
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" id="resetEmail" required>
+                </div>
+                
+                <button type="button" class="btn btn-primary w-100" onclick="handlePasswordReset()">
+                    <i class="fas fa-key"></i> Send Reset Link
+                </button>
+            </form>
+            
+            <div class="auth-footer">
+                Remember your password? 
+                <a class="auth-link" onclick="showAuthPage('loginPage')">Sign in here</a>
+            </div>
+        </div>
+        
+        <!-- OTP Verification Page -->
+        <div id="otpPage" class="auth-card hidden">
+            <div class="auth-header">
+                <h1 class="auth-title">Verification Required</h1>
+                <p class="auth-subtitle">Enter OTP sent to your device</p>
+            </div>
+            
+            <form id="otpForm">
+                <div class="form-group">
+                    <label class="form-label">One-Time Password (OTP)</label>
+                    <input type="text" class="form-input" id="otpCode" placeholder="Enter 6-digit code" maxlength="6">
+                </div>
+                
+                <button type="button" class="btn btn-primary w-100" onclick="verifyOTP()">
+                    <i class="fas fa-shield-alt"></i> Verify & Continue
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- ====== MAIN BANKING APPLICATION ====== -->
+    <div id="bankingApp" class="hidden">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-container">
+                <div class="bank-logo" onclick="showMainPage('dashboard')">
+                    <div class="logo-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div>
+                        <div class="logo-text">SecureBank</div>
+                    </div>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li><a class="nav-link active" onclick="showMainPage('dashboard')">
+                            <i class="fas fa-home"></i> Dashboard
+                        </a></li>
+                        <li><a class="nav-link" onclick="showMainPage('accounts')">
+                            <i class="fas fa-wallet"></i> Accounts
+                        </a></li>
+                        <li><a class="nav-link" onclick="showMainPage('transfer')">
+                            <i class="fas fa-exchange-alt"></i> Transfer
+                        </a></li>
+                        <li><a class="nav-link" onclick="showMainPage('transactions')">
+                            <i class="fas fa-history"></i> Transactions
+                        </a></li>
+                        <li><a class="nav-link" onclick="showMainPage('cards')">
+                            <i class="fas fa-credit-card"></i> Cards
+                        </a></li>
+                        <li><a class="nav-link" onclick="showMainPage('support')">
+                            <i class="fas fa-headset"></i> Support
+                        </a></li>
+                    </ul>
+                </nav>
+                
+                <div class="user-menu">
+                    <div class="user-avatar" id="userAvatar">JD</div>
+                    <div>
+                        <div id="userName">John Doe</div>
+                        <div style="font-size: 0.8rem; opacity: 0.9;" id="userAccount">Account: •••• 1001</div>
+                    </div>
+                    <button class="btn btn-danger" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <div class="main-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Quick Actions</div>
+                    <ul class="sidebar-menu">
+                        <li><a class="sidebar-link active" onclick="showMainPage('dashboard')">
+                            <span class="sidebar-icon"><i class="fas fa-tachometer-alt"></i></span>
+                            Dashboard
+                        </a></li>
+                        <li><a class="sidebar-link" onclick="showMainPage('transfer')">
+                            <span class="sidebar-icon"><i class="fas fa-paper-plane"></i></span>
+                            Send Money
+                        </a></li>
+                        <li><a class="sidebar-link" onclick="showMainPage('deposit')">
+                            <span class="sidebar-icon"><i class="fas fa-hand-holding-usd"></i></span>
+                            Deposit Funds
+                        </a></li>
+                        <li><a class="sidebar-link" onclick="showMainPage('billpay')">
+                            <span class="sidebar-icon"><i class="fas fa-file-invoice-dollar"></i></span>
+                            Pay Bills
+                        </a></li>
+                        <li><a class="sidebar-link" onclick="showMainPage('cards')">
+                            <span class="sidebar-icon"><i class="fas fa-credit-card"></i></span>
+                            Manage Cards
+                        </a></li>
+                        <li><a class="sidebar-link" onclick="showMainPage('statements')">
+                            <span class="sidebar-icon"><i class="fas fa-file-pdf"></i></span>
+                            Statements
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-title">My Accounts</div>
+                    <ul class="sidebar-menu" id="accountSidebarList">
+                        <!-- Accounts loaded dynamically -->
+                    </ul>
+                </div>
+            </aside>
+            
+            <!-- Content Area -->
+            <main class="content-area">
+                <!-- ====== DASHBOARD PAGE ====== -->
+                <div id="dashboardPage">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Dashboard</h1>
+                            <p class="page-subtitle">Welcome back, <span id="dashboardUserName">John</span> | Last login: Today</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="refreshDashboard()">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="quick-actions-grid">
+                        <div class="quick-action-btn" onclick="showMainPage('transfer')">
+                            <div class="quick-action-icon">
+                                <i class="fas fa-paper-plane"></i>
+                            </div>
+                            <div class="card-title">Send Money</div>
+                            <div class="card-detail">Transfer funds instantly</div>
+                        </div>
+                        
+                        <div class="quick-action-btn" onclick="showMainPage('deposit')">
+                            <div class="quick-action-icon">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <div class="card-title">Deposit Check</div>
+                            <div class="card-detail">Mobile check deposit</div>
+                        </div>
+                        
+                        <div class="quick-action-btn" onclick="showMainPage('billpay')">
+                            <div class="quick-action-icon">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <div class="card-title">Pay Bills</div>
+                            <div class="card-detail">Schedule bill payments</div>
+                        </div>
+                        
+                        <div class="quick-action-btn" onclick="showMainPage('cards')">
+                            <div class="quick-action-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="card-title">Cards</div>
+                            <div class="card-detail">Manage debit/credit cards</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Account Overview -->
+                    <div class="dashboard-grid">
+                        <div class="info-card">
+                            <div class="card-header">
+                                <div class="card-title">Primary Checking</div>
+                                <div class="card-icon">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                            </div>
+                            <div class="card-balance" id="primaryBalance">$12,500.75</div>
+                            <div class="card-detail">Account: •••• 1001</div>
+                            <div class="card-detail">Available Balance: $12,500.75</div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="card-header">
+                                <div class="card-title">Savings Account</div>
+                                <div class="card-icon">
+                                    <i class="fas fa-piggy-bank"></i>
+                                </div>
+                            </div>
+                            <div class="card-balance" id="savingsBalance">$8,560.25</div>
+                            <div class="card-detail">Account: •••• 2001</div>
+                            <div class="card-detail">Interest Rate: 1.25% APY</div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="card-header">
+                                <div class="card-title">Credit Card</div>
+                                <div class="card-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                            </div>
+                            <div class="card-balance" style="color: var(--danger-red);">-$1,250.50</div>
+                            <div class="card-detail">Card: •••• 4321</div>
+                            <div class="card-detail">Credit Limit: $5,000.00</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Transactions -->
+                    <div class="form-container">
+                        <div class="table-header">
+                            <div class="table-title">Recent Transactions</div>
+                            <button class="btn btn-primary" onclick="showMainPage('transactions')">
+                                <i class="fas fa-history"></i> View All
+                            </button>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentTransactions">
+                                    <tr>
+                                        <td>2024-01-15</td>
+                                        <td>Grocery Store</td>
+                                        <td style="color: var(--danger-red);">-$125.50</td>
+                                        <td><span style="color: var(--success-green);">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2024-01-14</td>
+                                        <td>Salary Deposit</td>
+                                        <td style="color: var(--success-green);">+$2,500.00</td>
+                                        <td><span style="color: var(--success-green);">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2024-01-13</td>
+                                        <td>Online Shopping</td>
+                                        <td style="color: var(--danger-red);">-$89.99</td>
+                                        <td><span style="color: var(--success-green);">Completed</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ====== TRANSFER PAGE ====== -->
+                <div id="transferPage" class="hidden">
+                    <div class="page-header">
+                        <h1 class="page-title">Transfer Funds</h1>
+                        <button class="btn" onclick="showMainPage('dashboard')">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </button>
+                    </div>
+                    
+                    <div class="form-container">
+                        <form id="transferForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">From Account</label>
+                                    <select class="form-input" id="fromAccount">
+                                        <!-- Loaded dynamically -->
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">To Account</label>
+                                    <input type="text" class="form-input" id="toAccount" placeholder="Enter account number" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Amount ($)</label>
+                                <input type="number" class="form-input" id="transferAmount" step="0.01" min="0.01" value="100.00" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Description</label>
+                                <input type="text" class="form-input" id="transferDescription" placeholder="Payment for services">
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary" onclick="processTransfer()">
+                                <i class="fas fa-paper-plane"></i> Transfer Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- ====== DEPOSIT PAGE ====== -->
+                <div id="depositPage" class="hidden">
+                    <div class="page-header">
+                        <h1 class="page-title">Deposit Funds</h1>
+                        <button class="btn" onclick="showMainPage('dashboard')">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </button>
+                    </div>
+                    
+                    <div class="form-container">
+                        <form id="depositForm">
+                            <div class="form-group">
+                                <label class="form-label">To Account</label>
+                                <select class="form-input" id="depositAccount">
+                                    <!-- Loaded dynamically -->
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Amount ($)</label>
+                                <input type="number" class="form-input" id="depositAmount" step="0.01" min="0.01" value="500.00" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Check Image (Optional)</label>
+                                <input type="file" class="form-input" id="checkImage" accept="image/*">
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary" onclick="processDeposit()">
+                                <i class="fas fa-hand-holding-usd"></i> Submit Deposit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- ====== ACCOUNTS PAGE ====== -->
+                <div id="accountsPage" class="hidden">
+                    <div class="page-header">
+                        <h1 class="page-title">My Accounts</h1>
+                        <button class="btn" onclick="showMainPage('dashboard')">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </button>
+                    </div>
+                    
+                    <div class="dashboard-grid" id="accountsGrid">
+                        <!-- Accounts loaded dynamically -->
+                    </div>
+                    
+                    <div class="form-container" style="margin-top: 2rem;">
+                        <div class="table-header">
+                            <div class="table-title">Account Statements</div>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Statement Period</th>
+                                        <th>Account</th>
+                                        <th>Opening Balance</th>
+                                        <th>Closing Balance</th>
+                                        <th>Download</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="statementsTable">
+                                    <tr>
+                                        <td>January 2024</td>
+                                        <td>•••• 1001</td>
+                                        <td>$12,000.00</td>
+                                        <td>$12,500.75</td>
+                                        <td>
+                                            <button class="btn" onclick="downloadStatement('1001', '2024-01')">
+                                                <i class="fas fa-download"></i> PDF
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ====== TRANSACTIONS PAGE ====== -->
+                <div id="transactionsPage" class="hidden">
+                    <div class="page-header">
+                        <h1 class="page-title">Transaction History</h1>
+                        <div>
+                            <input type="text" class="form-input" id="transactionSearch" placeholder="Search transactions..." style="width: 300px;">
+                        </div>
+                    </div>
+                    
+                    <div class="form-container">
+                        <div class="table-header">
+                            <div class="table-title">All Transactions</div>
+                            <div>
+                                <button class="btn btn-primary" onclick="downloadStatement()">
+                                    <i class="fas fa-download"></i> Download
+                                </button>
+                                <button class="btn btn-success" onclick="exportToCSV()" style="margin-left: 0.5rem;">
+                                    <i class="fas fa-file-csv"></i> Export CSV
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Account</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="allTransactions">
+                                    <!-- Loaded dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ====== CARDS PAGE ====== -->
+                <div id="cardsPage" class="hidden">
+                    <div class="page-header">
+                        <h1 class="page-title">My Cards</h1>
+                        <button class="btn" onclick="showMainPage('dashboard')">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </button>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="info-card">
+                            <div class="card-header">
+                                <div class="card-title">Debit Card</div>
+                                <div class="card-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                            </div>
+                            <div class="card-balance">•••• 4321</div>
+                            <div class="card-detail">Expires: 12/26</div>
+                            <div class="card-detail">Status: Active</div>
+                            <div style="margin-top: 1rem;">
+                                <button class="btn" onclick="showModal('cardSettingsModal')" style="width: 100%;">
+                                    <i class="fas fa-cog"></i> Card Settings
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="card-header">
+                                <div class="card-title">Request New Card</div>
+                                <div class="card-icon">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                            </div>
+                            <div class="card-detail">Request a new debit or credit card</div>
+                            <div style="margin-top: 1rem;">
+                                <button class="btn btn-primary" onclick="requestNewCard()" style="width: 100%;">
+                                    <i class="fas fa-credit-card"></i> Request Card
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ====== SUPPORT PAGE ====== -->
+                <div id="supportPage" class="hidden">
+                    <div class="page-header">
+                        <h1 class="page-title">Customer Support</h1>
+                        <button class="btn" onclick="showMainPage('dashboard')">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </button>
+                    </div>
+                    
+                    <div class="form-container">
+                        <form id="supportForm">
+                            <div class="form-group">
+                                <label class="form-label">Subject</label>
+                                <input type="text" class="form-input" id="ticketSubject" placeholder="Brief description of your issue" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Category</label>
+                                <select class="form-input" id="ticketCategory">
+                                    <option value="technical">Technical Issue</option>
+                                    <option value="account">Account Problem</option>
+                                    <option value="transaction">Transaction Issue</option>
+                                    <option value="security">Security Concern</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Message</label>
+                                <textarea class="form-input" id="ticketMessage" rows="5" placeholder="Describe your issue in detail" required></textarea>
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary" onclick="submitSupportTicket()">
+                                <i class="fas fa-paper-plane"></i> Submit Ticket
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- ====== BILL PAY PAGE ====== -->
+                <div id="billpayPage" class="hidden">
+                    <div class="page-header">
+                        <h1 class="page-title">Pay Bills</h1>
+                        <button class="btn" onclick="showMainPage('dashboard')">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </button>
+                    </div>
+                    
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label class="form-label">Select Biller</label>
+                            <select class="form-input" id="billerSelect">
+                                <option value="electric">Electric Company</option>
+                                <option value="water">Water Department</option>
+                                <option value="internet">Internet Provider</option>
+                                <option value="creditcard">Credit Card Payment</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Amount ($)</label>
+                            <input type="number" class="form-input" id="billAmount" step="0.01" min="0.01" value="150.00">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Payment Date</label>
+                            <input type="date" class="form-input" id="paymentDate">
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary" onclick="payBill()">
+                            <i class="fas fa-file-invoice-dollar"></i> Pay Bill
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- ====== STATEMENTS PAGE ====== -->
+                <div id="statementsPage" class="hidden">
+                    <div class="page-header">
+                        <h1 class="page-title">Account Statements</h1>
+                        <button class="btn" onclick="showMainPage('dashboard')">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </button>
+                    </div>
+                    
+                    <div class="form-container">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Select Account</label>
+                                <select class="form-input" id="statementAccount">
+                                    <!-- Loaded dynamically -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Statement Period</label>
+                                <select class="form-input" id="statementPeriod">
+                                    <option value="last-month">Last Month</option>
+                                    <option value="this-month">This Month</option>
+                                    <option value="last-3-months">Last 3 Months</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <button class="btn btn-primary" onclick="downloadStatementPDF()">
+                                <i class="fas fa-file-pdf"></i> Download PDF
+                            </button>
+                            <button class="btn btn-success" onclick="exportToCSV()" style="margin-left: 1rem;">
+                                <i class="fas fa-file-csv"></i> Export CSV
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- ====== MODALS ====== -->
+    
+    <!-- OTP Modal -->
+    <div id="otpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Security Verification</div>
+                <button class="modal-close" onclick="closeModal('otpModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Enter OTP Sent to Your Device</label>
+                <input type="text" class="form-input" id="modalOtp" maxlength="6" placeholder="000000">
+            </div>
+            <button class="btn btn-primary w-100" onclick="verifyModalOTP()">
+                Verify & Continue
+            </button>
+        </div>
+    </div>
+    
+    <!-- Card Settings Modal -->
+    <div id="cardSettingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Card Settings</div>
+                <button class="modal-close" onclick="closeModal('cardSettingsModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Daily Spending Limit</label>
+                <input type="number" class="form-input" id="spendingLimit" value="1000">
+            </div>
+            <div class="form-group">
+                <label class="form-label">
+                    <input type="checkbox" id="internationalUse"> Allow International Use
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="form-label">
+                    <input type="checkbox" id="onlinePurchases"> Allow Online Purchases
+                </label>
+            </div>
+            <button class="btn btn-primary w-100" onclick="updateCardSettings()">
+                Save Settings
+            </button>
+        </div>
+    </div>
+    
+    <!-- Transfer Success Modal -->
+    <div id="transferSuccessModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Transfer Successful</div>
+                <button class="modal-close" onclick="closeModal('transferSuccessModal')">&times;</button>
+            </div>
+            <div style="text-align: center; padding: 2rem 0;">
+                <div style="font-size: 4rem; color: var(--success-green);">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 style="margin: 1rem 0;">Transfer Completed</h3>
+                <p>Your funds have been transferred successfully</p>
+            </div>
+            <button class="btn btn-primary w-100" onclick="closeModal('transferSuccessModal')">
+                Continue
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ====== GLOBAL STATE ======
+        let currentUser = null;
+        let users = [];
+        let transactions = [];
+        
+        // ====== INITIALIZE DATABASE ======
+        function initializeDatabase() {
+            // Check if data exists in localStorage
+            const savedUsers = localStorage.getItem('bankUsers');
+            const savedTransactions = localStorage.getItem('bankTransactions');
+            
+            if (savedUsers) {
+                users = JSON.parse(savedUsers);
+            } else {
+                // Default users
+                users = [
+                    {
+                        id: 1,
+                        username: "admin",
+                        password: "admin123",
+                        email: "admin@securebank.com",
+                        firstName: "System",
+                        lastName: "Administrator",
+                        role: "admin",
+                        accounts: [
+                            { id: "1000", type: "checking", balance: 999999.99, number: "1000", displayNumber: "•••• 1000" }
+                        ],
+                        kycVerified: true,
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: 2,
+                        username: "john.doe",
+                        password: "password123",
+                        email: "john.doe@email.com",
+                        firstName: "John",
+                        lastName: "Doe",
+                        role: "customer",
+                        accounts: [
+                            { id: "1001", type: "checking", balance: 12500.75, number: "1001", displayNumber: "•••• 1001" },
+                            { id: "2001", type: "savings", balance: 8560.25, number: "2001", displayNumber: "•••• 2001" }
+                        ],
+                        kycVerified: true,
+                        createdAt: new Date().toISOString()
+                    }
+                ];
+                saveUsers();
+            }
+            
+            if (savedTransactions) {
+                transactions = JSON.parse(savedTransactions);
+            } else {
+                // Default transactions
+                transactions = [
+                    {
+                        id: 1,
+                        userId: 2,
+                        fromAccount: "1001",
+                        toAccount: "EXTERNAL",
+                        amount: 125.50,
+                        description: "Grocery Store",
+                        date: "2024-01-15",
+                        status: "completed",
+                        type: "debit"
+                    },
+                    {
+                        id: 2,
+                        userId: 2,
+                        fromAccount: "EXTERNAL",
+                        toAccount: "1001",
+                        amount: 2500.00,
+                        description: "Salary Deposit",
+                        date: "2024-01-14",
+                        status: "completed",
+                        type: "credit"
+                    },
+                    {
+                        id: 3,
+                        userId: 2,
+                        fromAccount: "1001",
+                        toAccount: "EXTERNAL",
+                        amount: 89.99,
+                        description: "Online Shopping",
+                        date: "2024-01-13",
+                        status: "completed",
+                        type: "debit"
+                    }
+                ];
+                saveTransactions();
+            }
+        }
+        
+        function saveUsers() {
+            localStorage.setItem('bankUsers', JSON.stringify(users));
+        }
+        
+        function saveTransactions() {
+            localStorage.setItem('bankTransactions', JSON.stringify(transactions));
+        }
+        
+        // ====== AUTHENTICATION FUNCTIONS ======
+        function showAuthPage(pageId) {
+            // Hide all auth pages
+            document.querySelectorAll('.auth-card').forEach(card => {
+                card.classList.add('hidden');
+            });
+            // Show requested page
+            document.getElementById(pageId).classList.remove('hidden');
+        }
+        
+        function handleLogin() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // VULNERABILITY #31: SQL Injection simulation
+            if (username.includes("' OR '1'='1' --") || username.includes("' OR '1'='1'")) {
+                // SQL Injection successful - login as first user
+                currentUser = users[0];
+                showBankingApp();
+                return;
+            }
+            
+            // Normal authentication
+            const user = users.find(u => 
+                (u.username === username || u.email === username) && u.password === password
+            );
+            
+            if (user) {
+                currentUser = user;
+                
+                // VULNERABILITY #10: Long-lived session
+                const session = {
+                    userId: user.id,
+                    expires: Date.now() + 30 * 24 * 60 * 60 * 1000 // 30 days
+                };
+                localStorage.setItem('bankSession', JSON.stringify(session));
+                
+                // Check if OTP required (for admin users)
+                if (user.role === 'admin') {
+                    showModal('otpModal');
+                } else {
+                    showBankingApp();
+                }
+                
+                return;
+            }
+            
+            // VULNERABILITY #2: Account enumeration
+            const userExists = users.some(u => u.username === username || u.email === username);
+            alert(userExists ? "Invalid password" : "User not found");
+        }
+        
+        function handleRegister() {
+            const firstName = document.getElementById('regFirstName').value;
+            const lastName = document.getElementById('regLastName').value;
+            const email = document.getElementById('regEmail').value;
+            const username = document.getElementById('regUsername').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            
+            // Validation
+            if (password !== confirmPassword) {
+                alert("Passwords do not match");
+                return;
+            }
+            
+            // VULNERABILITY #1: Weak password policy
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters");
+                return;
+            }
+            
+            // Check if user already exists
+            const userExists = users.some(u => u.username === username || u.email === email);
+            if (userExists) {
+                alert("Username or email already exists");
+                return;
+            }
+            
+            // Create new user
+            const newUserId = users.length + 1;
+            const newAccountNumber = 1000 + newUserId;
+            
+            const newUser = {
+                id: newUserId,
+                username: username,
+                password: password, // VULNERABILITY: Stored in plain text
+                email: email,
+                firstName: firstName,
+                lastName: lastName,
+                role: "customer",
+                accounts: [
+                    {
+                        id: newAccountNumber.toString(),
+                        type: "checking",
+                        balance: 1000.00, // Initial balance
+                        number: newAccountNumber.toString(),
+                        displayNumber: "•••• " + newAccountNumber.toString().slice(-4)
+                    }
+                ],
+                kycVerified: false,
+                createdAt: new Date().toISOString()
+            };
+            
+            users.push(newUser);
+            saveUsers();
+            
+            // Add welcome transaction
+            const welcomeTransaction = {
+                id: transactions.length + 1,
+                userId: newUserId,
+                fromAccount: "SYSTEM",
+                toAccount: newAccountNumber.toString(),
+                amount: 1000.00,
+                description: "Account Opening Bonus",
+                date: new Date().toISOString().split('T')[0],
+                status: "completed",
+                type: "credit"
+            };
+            
+            transactions.push(welcomeTransaction);
+            saveTransactions();
+            
+            alert("Account created successfully! You have received a $1000 opening bonus.");
+            showAuthPage('loginPage');
+        }
+        
+        function handlePasswordReset() {
+            const email = document.getElementById('resetEmail').value;
+            
+            // VULNERABILITY #2: Account enumeration
+            const user = users.find(u => u.email === email);
+            if (!user) {
+                alert("No account found with this email");
+                return;
+            }
+            
+            // VULNERABILITY #3: Insecure password reset
+            // VULNERABILITY #4: Reusable reset token
+            const resetToken = "RESET_" + Date.now();
+            user.resetToken = resetToken;
+            user.resetTokenExpires = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
+            
+            saveUsers();
+            alert("Password reset link has been sent to your email (simulated). Token: " + resetToken);
+            showAuthPage('loginPage');
+        }
+        
+        function verifyOTP() {
+            const otp = document.getElementById('otpCode').value;
+            
+            // VULNERABILITY #5: OTP bypass
+            // VULNERABILITY #7: No rate limiting
+            if (otp === "000000" || otp === "123456") {
+                showBankingApp();
+            } else {
+                alert("Invalid OTP");
+            }
+        }
+        
+        function verifyModalOTP() {
+            const otp = document.getElementById('modalOtp').value;
+            
+            // VULNERABILITY #5: OTP bypass
+            if (otp === "000000" || otp === "123456") {
+                closeModal('otpModal');
+                showBankingApp();
+            } else {
+                alert("Invalid OTP");
+            }
+        }
+        
+        function showBankingApp() {
+            document.getElementById('authPages').classList.add('hidden');
+            document.getElementById('bankingApp').classList.remove('hidden');
+            updateUserInfo();
+            showMainPage('dashboard');
+        }
+        
+        // ====== BANKING PAGES ======
+        function showMainPage(page) {
+            // Hide all pages
+            const pages = [
+                'dashboardPage', 'transferPage', 'depositPage', 'accountsPage',
+                'transactionsPage', 'cardsPage', 'supportPage', 'billpayPage', 'statementsPage'
+            ];
+            pages.forEach(pageId => {
+                document.getElementById(pageId).classList.add('hidden');
+            });
+            
+            // Update navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show requested page
+            document.getElementById(page + 'Page').classList.remove('hidden');
+            
+            // Update active navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.textContent.includes(page.charAt(0).toUpperCase() + page.slice(1))) {
+                    link.classList.add('active');
+                }
+            });
+            
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                if (link.textContent.includes(page.charAt(0).toUpperCase() + page.slice(1))) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Load page data
+            switch(page) {
+                case 'dashboard':
+                    loadDashboard();
+                    break;
+                case 'transfer':
+                    loadTransferPage();
+                    break;
+                case 'deposit':
+                    loadDepositPage();
+                    break;
+                case 'accounts':
+                    loadAccountsPage();
+                    break;
+                case 'transactions':
+                    loadTransactionsPage();
+                    break;
+                case 'statements':
+                    loadStatementsPage();
+                    break;
+            }
+        }
+        
+        function updateUserInfo() {
+            if (!currentUser) return;
+            
+            document.getElementById('userName').textContent = 
+                `${currentUser.firstName} ${currentUser.lastName}`;
+            document.getElementById('userAvatar').textContent = 
+                currentUser.firstName[0] + currentUser.lastName[0];
+            document.getElementById('dashboardUserName').textContent = currentUser.firstName;
+            
+            if (currentUser.accounts && currentUser.accounts.length > 0) {
+                document.getElementById('userAccount').textContent = 
+                    `Account: ${currentUser.accounts[0].displayNumber}`;
+            }
+            
+            // Update account sidebar
+            loadAccountSidebar();
+        }
+        
+        function loadDashboard() {
+            if (!currentUser || !currentUser.accounts) return;
+            
+            // Update balances
+            const checkingAccount = currentUser.accounts.find(a => a.type === 'checking');
+            const savingsAccount = currentUser.accounts.find(a => a.type === 'savings');
+            
+            if (checkingAccount) {
+                document.getElementById('primaryBalance').textContent = 
+                    `$${checkingAccount.balance.toFixed(2)}`;
+            }
+            
+            if (savingsAccount) {
+                document.getElementById('savingsBalance').textContent = 
+                    `$${savingsAccount.balance.toFixed(2)}`;
+            }
+        }
+        
+        function loadAccountSidebar() {
+            const list = document.getElementById('accountSidebarList');
+            list.innerHTML = '';
+            
+            currentUser.accounts.forEach(account => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <a class="sidebar-link" onclick="showAccountDetails('${account.id}')">
+                        <span class="sidebar-icon"><i class="fas fa-${account.type === 'checking' ? 'university' : 'piggy-bank'}"></i></span>
+                        ${account.type.charAt(0).toUpperCase() + account.type.slice(1)}
+                        <span style="margin-left: auto; font-weight: bold;">
+                            $${account.balance.toFixed(2)}
+                        </span>
+                    </a>
+                `;
+                list.appendChild(li);
+            });
+        }
+        
+        function loadTransferPage() {
+            const select = document.getElementById('fromAccount');
+            select.innerHTML = '';
+            
+            currentUser.accounts.forEach(account => {
+                const option = document.createElement('option');
+                option.value = account.id;
+                option.textContent = `${account.type.charAt(0).toUpperCase() + account.type.slice(1)} (${account.displayNumber}) - $${account.balance.toFixed(2)}`;
+                select.appendChild(option);
+            });
+        }
+        
+        function processTransfer() {
+            const fromAccountId = document.getElementById('fromAccount').value;
+            const toAccount = document.getElementById('toAccount').value;
+            const amount = parseFloat(document.getElementById('transferAmount').value);
+            const description = document.getElementById('transferDescription').value;
+            
+            if (!fromAccountId || !toAccount || !amount || amount <= 0) {
+                alert("Please fill all fields correctly");
+                return;
+            }
+            
+            const fromAccount = currentUser.accounts.find(a => a.id === fromAccountId);
+            if (!fromAccount) {
+                alert("Invalid sender account");
+                return;
+            }
+            
+            // VULNERABILITY #23: Negative amount transfer (business logic flaw)
+            // Actually, we should prevent negative amounts, but let's leave the vulnerability
+            if (fromAccount.balance < amount && amount > 0) {
+                alert("Insufficient funds");
+                return;
+            }
+            
+            // VULNERABILITY #11: IDOR - no validation of recipient account
+            // Could transfer to any account ID
+            
+            // Update balance
+            fromAccount.balance -= amount;
+            
+            // Add transaction
+            const transaction = {
+                id: transactions.length + 1,
+                userId: currentUser.id,
+                fromAccount: fromAccountId,
+                toAccount: toAccount,
+                amount: amount,
+                description: description,
+                date: new Date().toISOString().split('T')[0],
+                status: 'completed',
+                type: 'transfer'
+            };
+            
+            transactions.push(transaction);
+            saveTransactions();
+            saveUsers();
+            
+            showModal('transferSuccessModal');
+            loadDashboard();
+        }
+        
+        function loadDepositPage() {
+            const select = document.getElementById('depositAccount');
+            select.innerHTML = '';
+            
+            currentUser.accounts.forEach(account => {
+                const option = document.createElement('option');
+                option.value = account.id;
+                option.textContent = `${account.type.charAt(0).toUpperCase() + account.type.slice(1)} (${account.displayNumber})`;
+                select.appendChild(option);
+            });
+        }
+        
+        function processDeposit() {
+            const accountId = document.getElementById('depositAccount').value;
+            const amount = parseFloat(document.getElementById('depositAmount').value);
+            
+            if (!accountId || !amount || amount <= 0) {
+                alert("Please fill all fields correctly");
+                return;
+            }
+            
+            const account = currentUser.accounts.find(a => a.id === accountId);
+            if (!account) {
+                alert("Invalid account");
+                return;
+            }
+            
+            // VULNERABILITY #10: File upload without validation
+            const fileInput = document.getElementById('checkImage');
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                console.log(`File uploaded: ${file.name}, Type: ${file.type}, Size: ${file.size}`);
+            }
+            
+            // Update balance
+            account.balance += amount;
+            
+            // Add transaction
+            const transaction = {
+                id: transactions.length + 1,
+                userId: currentUser.id,
+                fromAccount: "DEPOSIT",
+                toAccount: accountId,
+                amount: amount,
+                description: "Check Deposit",
+                date: new Date().toISOString().split('T')[0],
+                status: 'completed',
+                type: 'credit'
+            };
+            
+            transactions.push(transaction);
+            saveTransactions();
+            saveUsers();
+            
+            alert(`Deposit of $${amount.toFixed(2)} successful!`);
+            showMainPage('dashboard');
+        }
+        
+        function loadAccountsPage() {
+            const grid = document.getElementById('accountsGrid');
+            grid.innerHTML = '';
+            
+            currentUser.accounts.forEach(account => {
+                const card = document.createElement('div');
+                card.className = 'info-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-title">${account.type.charAt(0).toUpperCase() + account.type.slice(1)} Account</div>
+                        <div class="card-icon">
+                            <i class="fas fa-${account.type === 'checking' ? 'university' : 'piggy-bank'}"></i>
+                        </div>
+                    </div>
+                    <div class="card-balance">$${account.balance.toFixed(2)}</div>
+                    <div class="card-detail">Account: ${account.displayNumber}</div>
+                    <div class="card-detail">Account ID: ${account.id}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+        function loadTransactionsPage() {
+            const tbody = document.getElementById('allTransactions');
+            tbody.innerHTML = '';
+            
+            const userTransactions = transactions.filter(t => t.userId === currentUser.id);
+            
+            userTransactions.forEach(transaction => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${transaction.date}</td>
+                    <td>${transaction.description}</td>
+                    <td>${transaction.fromAccount}</td>
+                    <td style="color: ${transaction.type === 'credit' ? 'var(--success-green)' : 'var(--danger-red)'};">
+                        ${transaction.type === 'credit' ? '+' : '-'}$${Math.abs(transaction.amount).toFixed(2)}
+                    </td>
+                    <td><span style="color: var(--success-green);">${transaction.status}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        
+        function loadStatementsPage() {
+            const select = document.getElementById('statementAccount');
+            select.innerHTML = '';
+            
+            currentUser.accounts.forEach(account => {
+                const option = document.createElement('option');
+                option.value = account.id;
+                option.textContent = `${account.type.charAt(0).toUpperCase() + account.type.slice(1)} (${account.displayNumber})`;
+                select.appendChild(option);
+            });
+        }
+        
+        function downloadStatement(accountId, period) {
+            // VULNERABILITY #14: IDOR in statement downloads
+            alert(`Downloading statement for account ${accountId || document.getElementById('statementAccount').value}...`);
+        }
+        
+        function downloadStatementPDF() {
+            const accountId = document.getElementById('statementAccount').value;
+            const period = document.getElementById('statementPeriod').value;
+            downloadStatement(accountId, period);
+        }
+        
+        function exportToCSV() {
+            alert("Exporting transactions to CSV...");
+        }
+        
+        function payBill() {
+            const biller = document.getElementById('billerSelect').value;
+            const amount = parseFloat(document.getElementById('billAmount').value);
+            
+            if (!amount || amount <= 0) {
+                alert("Please enter a valid amount");
+                return;
+            }
+            
+            // Find checking account
+            const checkingAccount = currentUser.accounts.find(a => a.type === 'checking');
+            if (!checkingAccount) {
+                alert("No checking account found");
+                return;
+            }
+            
+            if (checkingAccount.balance < amount) {
+                alert("Insufficient funds");
+                return;
+            }
+            
+            checkingAccount.balance -= amount;
+            
+            // Add transaction
+            const transaction = {
+                id: transactions.length + 1,
+                userId: currentUser.id,
+                fromAccount: checkingAccount.id,
+                toAccount: biller.toUpperCase(),
+                amount: amount,
+                description: `Bill payment: ${biller}`,
+                date: new Date().toISOString().split('T')[0],
+                status: 'completed',
+                type: 'debit'
+            };
+            
+            transactions.push(transaction);
+            saveTransactions();
+            saveUsers();
+            
+            alert(`Bill payment of $${amount.toFixed(2)} to ${biller} successful!`);
+            loadDashboard();
+        }
+        
+        function requestNewCard() {
+            alert("New card request submitted! It will arrive in 7-10 business days.");
+        }
+        
+        function updateCardSettings() {
+            alert("Card settings updated!");
+            closeModal('cardSettingsModal');
+        }
+        
+        function submitSupportTicket() {
+            const subject = document.getElementById('ticketSubject').value;
+            const category = document.getElementById('ticketCategory').value;
+            const message = document.getElementById('ticketMessage').value;
+            
+            if (!subject || !message) {
+                alert("Please fill in subject and message");
+                return;
+            }
+            
+            // VULNERABILITY #37: Stored XSS
+            // The message is stored without sanitization
+            
+            alert("Support ticket submitted successfully! Ticket ID: #" + Math.floor(Math.random() * 10000));
+            document.getElementById('ticketSubject').value = '';
+            document.getElementById('ticketMessage').value = '';
+        }
+        
+        function refreshDashboard() {
+            alert("Dashboard refreshed!");
+            loadDashboard();
+        }
+        
+        function showAccountDetails(accountId) {
+            alert(`Showing details for account ${accountId}`);
+        }
+        
+        // ====== MODAL FUNCTIONS ======
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('bankSession');
+            document.getElementById('bankingApp').classList.add('hidden');
+            document.getElementById('authPages').classList.remove('hidden');
+            showAuthPage('loginPage');
+            
+            // Clear form fields
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+        }
+        
+        // ====== INITIALIZATION ======
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize database
+            initializeDatabase();
+            
+            // Check for existing session
+            const savedSession = localStorage.getItem('bankSession');
+            if (savedSession) {
+                const session = JSON.parse(savedSession);
+                if (session.expires > Date.now()) {
+                    currentUser = users.find(u => u.id === session.userId);
+                    if (currentUser) {
+                        showBankingApp();
+                        return;
+                    }
+                }
+            }
+            
+            // Show login page
+            showAuthPage('loginPage');
+            
+            // Demo credentials for testing
+            console.log("Demo Credentials:");
+            console.log("Admin: admin / admin123");
+            console.log("User: john.doe / password123");
+            console.log("SQL Injection: ' OR '1'='1' --");
+            console.log("OTP Bypass: 000000");
+        });
+        
+        // ====== HIDDEN ADMIN PANEL FUNCTIONALITY ======
+        // This would be accessible via /admin or discovered via directory brute force
+        window.adminAPI = {
+            // Hidden admin endpoint
+            getUsers: function() {
+                return users;
+            },
+            
+            // Command injection vulnerable endpoint
+            systemCommand: function(cmd) {
+                // VULNERABILITY #12: Command injection
+                return `Executing: ${cmd}`;
+            },
+            
+            // IDOR vulnerable endpoint
+            getUserById: function(userId) {
+                // VULNERABILITY #11: IDOR
+                return users.find(u => u.id == userId);
+            }
+        };
+    </script>
+</body>
+  </html>
